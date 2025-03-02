@@ -1,0 +1,57 @@
+/* src/app/globals.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  /* Set default colors for the entire site */
+  body {
+    @apply bg-himalaya-ice text-himalaya-peak;
+  }
+
+  /* Default heading styles */
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-serif;
+  }
+  
+  h1 {
+    @apply text-3xl font-medium mb-6;
+  }
+  
+  h2 {
+    @apply text-2xl font-medium mb-4;
+  }
+  
+  /* Default link styles */
+  a {
+    @apply text-himalaya-deep hover:text-himalaya-accent transition-colors;
+  }
+}
+
+/* Custom component classes */
+@layer components {
+  .card {
+    @apply bg-white rounded-lg shadow-sm p-6 transition-all;
+  }
+  
+  .card:hover {
+    @apply shadow-md;
+  }
+  
+  .btn {
+    @apply px-4 py-2 rounded-full transition-colors;
+  }
+  
+  .btn-primary {
+    @apply bg-himalaya-deep text-white hover:bg-himalaya-stone;
+  }
+  
+  .btn-secondary {
+    @apply bg-himalaya-stone text-himalaya-peak hover:bg-himalaya-mist;
+  }
+}
+
+/* Any specific overrides outside of Tailwind's utility system */
+.special-element {
+  background: linear-gradient(to right, #d9e0e6, #c0d2e4);
+}
