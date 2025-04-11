@@ -75,7 +75,7 @@ export default function Home() {
     <div className="pt-6 pb-10 px-4 sm:px-6">
       {/* Header */}
       <header className="mb-8">
-        <h1 className="text-3xl font-mono font-medium mb-2"> &gt; kyth's directory</h1>
+        <h1 className="text-3xl font-mono font-medium mb-2"> &gt; kyth&apos;s directory</h1>
         <p className="text-himalaya-shadow">
           links, projects, other stuff you should know about me
         </p>
@@ -149,7 +149,7 @@ export default function Home() {
           {/* Digital Garden - shorter card */}
           <div className="bg-white rounded-lg shadow-sm p-4 sm:p-5 transition-all hover:shadow-md border border-himalaya-mist flex-shrink">
             <h2 className="text-xl font-mono font-medium mb-2">digital garden.</h2>
-            <p className="text-himalaya-shadow mb-3 text-sm">Projects I'm currently growing:</p>
+            <p className="text-himalaya-shadow mb-3 text-sm">projects i&apos;m currently growing:</p>
             
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               {projects.map((project, index) => (
@@ -216,7 +216,7 @@ export default function Home() {
 
       {/* Tag Cloud */}
       <div className="mt-10 mb-6">
-        <h2 className="text-xl font-mono font-medium mb-4">Explore Topics</h2>
+        <h2 className="text-xl font-mono font-medium mb-4">explore topics</h2>
         <div className="flex flex-wrap gap-2">
           {['Art', 'Code', 'Travel', 'Tech', 'Design', 'Music', 'Boba reviews'].map((tag, index) => (
             <Link 
