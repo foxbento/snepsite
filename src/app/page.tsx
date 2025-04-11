@@ -2,10 +2,6 @@ import Link from "next/link";
 import { Star } from "lucide-react";
 import SpotifyNowPlaying from "@/components/layout/SpotifyNowPlaying";
 
-// Music license: Uppbeat - Nostalgic Bossa by Christian Larssen
-// License code: 5WRRCIBM6S78FSVT
-
-
 // Sample data for blog posts and content
 const posts = [
   {
@@ -23,7 +19,7 @@ const posts = [
   {
     title: "Photography Collection",
     imageCount: 12,
-    category: "Landscapes",
+    category: "Commissioned Art",
     type: "gallery"
   },
   {
@@ -76,19 +72,19 @@ const projects = [
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-himalaya-ice text-himalaya-peak p-6">
+    <div className="pt-6 pb-10 px-4 sm:px-6">
       {/* Header */}
       <header className="mb-8">
-        <h1 className="text-3xl font-mono font-medium mb-2"> &gt; kyth&apos;s directory</h1>
+        <h1 className="text-3xl font-mono font-medium mb-2"> &gt; kyth's directory</h1>
         <p className="text-himalaya-shadow">
           links, projects, other stuff you should know about me
         </p>
       </header>
 
       {/* Masonry Grid Layout */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {/* Featured Post */}
-        <div className="bg-white rounded-lg shadow-sm p-6 md:col-span-2 transition-all hover:shadow-md border border-himalaya-mist">
+        <div className="bg-white rounded-lg shadow-sm p-6 sm:col-span-2 transition-all hover:shadow-md border border-himalaya-mist">
           <h2 className="text-xl font-mono font-medium mb-4">latest post.</h2>
           <h3 className="text-lg mb-2">{posts[0].title}</h3>
           <p className="text-himalaya-shadow mb-4">{posts[0].excerpt}</p>
@@ -109,7 +105,7 @@ export default function Home() {
         {/* Container to hold both cards in a single column */}
         <div className="flex flex-col space-y-6 col-span-1">
           {/* Convention listings - taller card */}
-          <div className="bg-white rounded-lg shadow-sm p-4 md:p-5 transition-all hover:shadow-md border border-himalaya-mist">
+          <div className="bg-white rounded-lg shadow-sm p-4 sm:p-5 transition-all hover:shadow-md border border-himalaya-mist">
             <h2 className="text-xl font-mono font-medium mb-3">conventions.</h2>
             
             {/* Current year plans - more compact */}
@@ -151,9 +147,9 @@ export default function Home() {
           </div>
 
           {/* Digital Garden - shorter card */}
-          <div className="bg-white rounded-lg shadow-sm p-4 md:p-5 transition-all hover:shadow-md border border-himalaya-mist flex-shrink">
+          <div className="bg-white rounded-lg shadow-sm p-4 sm:p-5 transition-all hover:shadow-md border border-himalaya-mist flex-shrink">
             <h2 className="text-xl font-mono font-medium mb-2">digital garden.</h2>
-            <p className="text-himalaya-shadow mb-3 text-sm">Projects I&apos;m currently growing:</p>
+            <p className="text-himalaya-shadow mb-3 text-sm">Projects I'm currently growing:</p>
             
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               {projects.map((project, index) => (
@@ -180,7 +176,7 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Photography Teaser */}
+        {/* Art Gallery Teaser */}
         <div className="bg-white rounded-lg shadow-sm p-6 transition-all hover:shadow-md border border-himalaya-mist">
           <h2 className="text-xl font-mono font-medium mb-4">art.</h2>
           <div className="aspect-square bg-himalaya-stone rounded-lg mb-4 flex items-center justify-center">
@@ -198,13 +194,31 @@ export default function Home() {
             </Link>
           </div>
         </div>
+
+        {/* NEW DIV - Added to the right of Art */}
+        <div className="bg-white rounded-lg shadow-sm p-6 transition-all hover:shadow-md border border-himalaya-mist">
+          <h2 className="text-xl font-mono font-medium mb-4">reading list.</h2>
+          <div className="space-y-3">
+            <div>
+              <p className="font-medium">currently reading</p>
+              <p className="text-sm text-himalaya-shadow">Designing Data-Intensive Applications</p>
+            </div>
+            <div>
+              <p className="font-medium">up next</p>
+              <ul className="text-sm text-himalaya-shadow list-disc list-inside">
+                <li>An Introduction to Statistical Learning</li>
+                <li>Thinking, Fast and Slow</li>
+              </ul>
+            </div>
+          </div>
+        </div>
       </div>
 
       {/* Tag Cloud */}
       <div className="mt-10 mb-6">
         <h2 className="text-xl font-mono font-medium mb-4">Explore Topics</h2>
         <div className="flex flex-wrap gap-2">
-          {['Photography', 'Code', 'Travel', 'Mountains', 'Design', 'Music', 'Minimalism'].map((tag, index) => (
+          {['Art', 'Code', 'Travel', 'Tech', 'Design', 'Music', 'Boba reviews'].map((tag, index) => (
             <Link 
               key={index}
               href={`/tags/${tag.toLowerCase()}`}

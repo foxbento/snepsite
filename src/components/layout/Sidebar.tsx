@@ -1,75 +1,82 @@
-// components/layout/Sidebar.tsx
 "use client"
 
-import Link from 'next/link'
-import Image from 'next/image'
+import Link from 'next/link';
 
-export default function Sidebar() {
+// Navigation links (should match your MobileNav component)
+const navLinks = [
+  { href: '/', label: 'directory' },
+  { href: '/diary', label: 'diary' },
+  { href: '/gallery', label: 'art' },
+  { href: '/about', label: 'about' },
+  { href: '/contact', label: 'contact' }
+];
+
+const Sidebar = () => {
   return (
-    <aside className="w-64 bg-himalaya-mist p-4 fixed h-full">
+    <div className="w-64 h-screen sticky top-0 p-6 bg-white border-r border-himalaya-mist overflow-y-auto">
       <div className="flex flex-col h-full">
+        {/* Logo/Site Name */}
         <div className="mb-8">
-          <Image
-            src="/avatar.png"
-            alt="Profile"
-            width={150}
-            height={150}
-            className="rounded-full bg-himalaya-stone p-2"
-          />
-          <h2 className="text-himalaya-peak mt-4 font-medium font-mono text-xl">kyth.</h2>
+          <Link href="/" className="font-mono font-medium text-xl text-himalaya-peak">
+            kyth
+          </Link>
+          <p className="text-sm text-himalaya-shadow mt-1">
+            blog & digital garden
+          </p>
         </div>
         
-        <nav className="flex-1">
-          <ul className="space-y-4">
-            <li>
-              <Link 
-                href="/" 
-                className="text-himalaya-shadow hover:text-himalaya-deep transition-colors block py-2"
-              >
-                Home
-              </Link>
-            </li>
-            <li>
-              <Link 
-                href="/diary" 
-                className="text-himalaya-shadow hover:text-himalaya-deep transition-colors block py-2"
-              >
-                Diary
-              </Link>
-            </li>
-            <li>
-              <Link 
-                href="/projects" 
-                className="text-himalaya-shadow hover:text-himalaya-deep transition-colors block py-2"
-              >
-                Projects
-              </Link>
-            </li>
-            <li>
-              <Link 
-                href="/archive" 
-                className="text-himalaya-shadow hover:text-himalaya-deep transition-colors block py-2"
-              >
-                Archive
-              </Link>
-            </li>
+        {/* Main Navigation */}
+        <nav className="flex-1 mb-8">
+          <ul className="space-y-3">
+            {navLinks.map((link) => (
+              <li key={link.href}>
+                <Link
+                  href={link.href}
+                  className="inline-block py-1 text-himalaya-peak hover:text-himalaya-accent transition-colors font-mono"
+                >
+                  &gt; {link.label}
+                </Link>
+              </li>
+            ))}
           </ul>
         </nav>
-
-        <div className="mt-auto">
-          <div className="text-sm text-himalaya-shadow">
-            Music by{' '}
-            <a 
-              href="https://uppbeat.io/t/christian-larssen/nostalgic-bossa"
+        
+        {/* External Links */}
+        <div className="mb-8">
+          <h3 className="font-mono text-sm mb-4 text-himalaya-peak">external links</h3>
+          <div className="flex flex-col space-y-3">
+            <Link 
+              href="https://github.com/yourhandle" 
               target="_blank"
-              rel="noopener noreferrer"
-              className="hover:underline text-himalaya-deep"
+              className="flex items-center gap-2 text-sm text-himalaya-shadow hover:text-himalaya-accent transition-colors"
             >
-              Christian Larssen
-            </a>
+              github
+            </Link>
+            <Link 
+              href="https://twitter.com/yourhandle" 
+              target="_blank"
+              className="flex items-center gap-2 text-sm text-himalaya-shadow hover:text-himalaya-accent transition-colors"
+            >
+              twitter
+            </Link>
+            <Link 
+              href="https://spotify.com/user/yourhandle" 
+              target="_blank"
+              className="flex items-center gap-2 text-sm text-himalaya-shadow hover:text-himalaya-accent transition-colors"
+            >
+              spotify
+            </Link>
           </div>
         </div>
+        
+        {/* Footer */}
+        <div className="mt-auto pt-6 border-t border-himalaya-mist text-xs text-himalaya-shadow">
+          <p>© 2025 kyth</p>
+          <p className="mt-1">Made with ♥ and NextJS</p>
+        </div>
       </div>
-    </aside>
-  )
-}
+    </div>
+  );
+};
+
+export default Sidebar;
