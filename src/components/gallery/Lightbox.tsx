@@ -3,7 +3,7 @@
 import { useEffect, useRef } from "react"
 import Image from "next/image"
 import { X, ChevronLeft, ChevronRight, ExternalLink } from "lucide-react"
-import { artists, type GalleryImage } from "@/data/gallery"
+import { artists, type Artist, type GalleryImage } from "@/data/gallery"
 
 interface Props {
   image: GalleryImage
@@ -15,7 +15,7 @@ interface Props {
 }
 
 export default function Lightbox({ image, onClose, onPrev, onNext, hasPrev, hasNext }: Props) {
-  const artist = image.artistId ? artists[image.artistId] : undefined
+  const artist: Artist | undefined = image.artistId ? artists[image.artistId] : undefined
   const ref = useRef<HTMLDialogElement>(null)
 
   useEffect(() => { ref.current?.showModal() }, [])

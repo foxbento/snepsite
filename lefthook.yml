@@ -1,0 +1,12 @@
+pre-commit:
+  parallel: true
+  commands:
+    prettier:
+      glob: "*.{ts,tsx,js,jsx,json,css}"
+      run: pnpm exec prettier --write {staged_files}
+      stage_fixed: true
+    lint:
+      glob: "*.{ts,tsx,js,jsx}"
+      run: pnpm exec eslint {staged_files}
+    build:
+      run: pnpm run build
