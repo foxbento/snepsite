@@ -1,26 +1,49 @@
-"use client"
+"use client";
 
-import { useState, useEffect } from "react"
+import { useSyncExternalStore } from "react";
 
-const KEY = "gallery-show-nsfw"
+const KEY = "gallery-show-nsfw";
+const listeners = new Set<() => void>();
+
+function getSnapshot(): boolean | null {
+  const stored = localStorage.getItem(KEY);
+  return stored === null ? null : stored === "true";
+}
+
+function subscribe(callback: () => void) {
+  listeners.add(callback);
+  window.addEventListener("storage", callback);
+  return () => {
+    listeners.delete(callback);
+    window.removeEventListener("storage", callback);
+  };
+}
+
+function notify() {
+  listeners.forEach((cb) => cb());
+}
 
 export function useNsfwToggle() {
-  const [pref, setPref] = useState<boolean | null>(null) // null = not yet answered
+  const pref = useSyncExternalStore(subscribe, getSnapshot, () => null);
 
-  useEffect(() => {
-    const stored = localStorage.getItem(KEY)
-    if (stored !== null) setPref(stored === "true")
-  }, [])
-
-  const accept = () => { localStorage.setItem(KEY, "true"); setPref(true) }
-  const decline = () => { localStorage.setItem(KEY, "false"); setPref(false) }
+  const accept = () => {
+    localStorage.setItem(KEY, "true");
+    notify();
+  };
+  const decline = () => {
+    localStorage.setItem(KEY, "false");
+    notify();
+  };
   const toggle = () => {
-    setPref(prev => {
-      const next = prev !== true
-      localStorage.setItem(KEY, String(next))
-      return next
-    })
-  }
+    localStorage.setItem(KEY, String(pref !== true));
+    notify();
+  };
 
-  return { showNsfw: pref === true, undecided: pref === null, accept, decline, toggle }
+  return {
+    showNsfw: pref === true,
+    undecided: pref === null,
+    accept,
+    decline,
+    toggle,
+  };
 }

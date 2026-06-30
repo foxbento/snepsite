@@ -1,53 +1,40 @@
-"use client"
+"use client";
 
-import { createContext, useContext, useState, useEffect, ReactNode } from 'react'
+import { createContext, useContext, useRef, useState, ReactNode } from "react";
 
 type AudioContextType = {
-  isPlaying: boolean
-  togglePlay: () => void
-}
+  isPlaying: boolean;
+  togglePlay: () => void;
+};
 
 const AudioContext = createContext<AudioContextType>({
   isPlaying: false,
   togglePlay: () => {},
-})
+});
 
-interface AudioProviderProps {
-  children: ReactNode
-}
-
-export function AudioProvider({ children }: AudioProviderProps) {
-  const [isPlaying, setIsPlaying] = useState(false)
-  const [audio, setAudio] = useState<HTMLAudioElement | null>(null)
-
-  // Move audio initialization to useEffect to avoid hydration mismatch
-  useEffect(() => {
-    // This will only run on the client side after hydration
-    const audioElement = new Audio('/music/nostalgic-bossa.mp3')
-    setAudio(audioElement)
-  }, [])
+export function AudioProvider({ children }: { children: ReactNode }) {
+  const [isPlaying, setIsPlaying] = useState(false);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
 
   const togglePlay = () => {
-    if (!audio) return;
-    
-    if (isPlaying) {
-      audio.pause()
-    } else {
-      const playPromise = audio.play()
-      if (playPromise !== undefined) {
-        playPromise.catch(error => {
-          console.error("Play failed:", error)
-        })
-      }
+    if (!audioRef.current) {
+      audioRef.current = new Audio("/music/nostalgic-bossa.mp3");
     }
-    setIsPlaying(!isPlaying)
-  }
+    if (isPlaying) {
+      audioRef.current.pause();
+    } else {
+      audioRef.current
+        .play()
+        .catch((err) => console.error("Play failed:", err));
+    }
+    setIsPlaying((p) => !p);
+  };
 
   return (
     <AudioContext.Provider value={{ isPlaying, togglePlay }}>
       {children}
     </AudioContext.Provider>
-  )
+  );
 }
 
-export const useAudio = () => useContext(AudioContext)
+export const useAudio = () => useContext(AudioContext);
