@@ -63,8 +63,6 @@ const pastConventions = {
   "2024": ["LIFC", "MFF"],
 };
 
-const cons2023 = ["LIFC", "AC", "FURUM"];
-
 // Projects for the digital garden section
 const projects = [
   { name: "personal site", progress: 65 },
