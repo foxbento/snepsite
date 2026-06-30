@@ -1,5 +1,7 @@
 import Link from "next/link";
 import { Star } from "lucide-react";
+import GalleryPreview from "@/components/gallery/GalleryPreview";
+import { galleryImages } from "@/data/gallery";
 import SpotifyNowPlaying from "@/components/layout/SpotifyNowPlaying";
 
 // Sample data for blog posts and content
@@ -179,12 +181,10 @@ export default function Home() {
         {/* Art Gallery Teaser */}
         <div className="bg-white rounded-lg shadow-sm p-6 transition-all hover:shadow-md border border-himalaya-mist">
           <h2 className="text-xl font-mono font-medium mb-4">art.</h2>
-          <div className="aspect-square bg-himalaya-stone rounded-lg mb-4 flex items-center justify-center">
-            <span className="text-white opacity-80">Gallery Preview</span>
-          </div>
+          <GalleryPreview />
           <div className="flex justify-between items-center">
             <span className="text-sm text-himalaya-shadow">
-              {posts[2].imageCount} images in {posts[2].category}
+              {galleryImages.length} images
             </span>
             <Link 
               href="/gallery" 
@@ -201,13 +201,13 @@ export default function Home() {
           <div className="space-y-3">
             <div>
               <p className="font-medium">currently reading</p>
-              <p className="text-sm text-himalaya-shadow">Designing Data-Intensive Applications</p>
+              <p className="text-sm text-himalaya-shadow">A Philosophy of Software Design</p>
             </div>
             <div>
               <p className="font-medium">up next</p>
               <ul className="text-sm text-himalaya-shadow list-disc list-inside">
-                <li>An Introduction to Statistical Learning</li>
-                <li>Thinking, Fast and Slow</li>
+                <li>Designing Data-Intensive Applications</li>
+                <li>The Pragmatic Programmer</li>
               </ul>
             </div>
           </div>
