@@ -18,7 +18,7 @@ const Sidebar = () => {
         {/* Logo/Site Name */}
         <div className="mb-8">
           <Link href="/" className="font-mono font-medium text-xl text-himalaya-peak">
-            kyth
+            smores
           </Link>
           <p className="text-sm text-himalaya-shadow mt-1">
             blog & digital garden
@@ -71,7 +71,7 @@ const Sidebar = () => {
         
         {/* Footer */}
         <div className="mt-auto pt-6 border-t border-himalaya-mist text-xs text-himalaya-shadow">
-          <p>© 2025 kyth</p>
+          <p>© 2025 smores</p>
           <p className="mt-1">Made with ♥ and NextJS</p>
         </div>
       </div>

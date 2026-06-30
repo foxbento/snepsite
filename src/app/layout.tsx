@@ -22,7 +22,7 @@ const libreBaskerville = Libre_Baskerville({
 });
 
 export const metadata: Metadata = {
-  title: 'kyth maxxing',
+  title: 'smores\'d to meet u',
   description: 'silly chungus personal blogsite',
 };
 

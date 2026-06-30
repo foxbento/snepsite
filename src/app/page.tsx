@@ -38,30 +38,32 @@ const posts = [
 
 // Current year conventions
 const currentYearConventions = [
-  { 
-    name: "Anthro New England", 
-    date: "January 16-19, 2025",
-    location: "Boston, Massachusetts",
+  {
+    name: "MYFur",
+    date: "May 2, 2026",
+    location: "Subang, Malaysia",
     confirmed: true
   },
-  { 
-    name: "Furnal Equinox", 
-    date: "March 21-23, 2025",
-    location: "Toronto, Ontario",
+  {
+    name: "IWAG",
+    date: "July 4-5, 2026",
+    location: "Jakarta, Indonesia",
     confirmed: true
   },
-  { 
-    name: "Furry Weekend Atlanta", 
-    date: "May 8-11, 2025",
-    location: "Atlanta, Georgia",
+  {
+    name: "EF",
+    date: "August 19-23, 2026",
+    location: "Hamburg, Germany",
     confirmed: true
   }
 ];
 
 const pastConventions = {
+  "2025": ["ANE", "FE", "FWA", "WAFF", "FURUM"],
   "2024": ["LIFC", "MFF"],
-  "2023": ["LIFC", "AC", "FURUM"],
 };
+
+export const cons2023 = ["LIFC", "AC", "FURUM"];
 
 // Projects for the digital garden section
 const projects = [
@@ -75,7 +77,7 @@ export default function Home() {
     <div className="pt-6 pb-10 px-4 sm:px-6">
       {/* Header */}
       <header className="mb-8">
-        <h1 className="text-3xl font-mono font-medium mb-2"> &gt; kyth&apos;s directory</h1>
+        <h1 className="text-3xl font-mono font-medium mb-2"> &gt; smores&apos;s directory</h1>
         <p className="text-himalaya-shadow">
           links, projects, other stuff you should know about me
         </p>
