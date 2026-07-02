@@ -1,42 +1,10 @@
 import Link from "next/link";
 import { Star } from "lucide-react";
+import { format } from "date-fns";
 import GalleryPreview from "@/components/gallery/GalleryPreview";
 import { galleryImages } from "@/data/gallery";
+import { getAllDiaryPosts } from "@/lib/diary";
 import SpotifyNowPlaying from "@/components/layout/SpotifyNowPlaying";
-
-// Sample data for blog posts and content
-const posts = [
-  {
-    title: "awawa",
-    excerpt: "meowmeowmeow",
-    date: "Feb 25, 2025",
-    type: "blog"
-  },
-  {
-    title: "Current Favorite Track",
-    artist: "Ambient Mountains",
-    songTitle: "Echoes of Snow",
-    type: "music"
-  },
-  {
-    title: "Photography Collection",
-    imageCount: 12,
-    category: "Commissioned Art",
-    type: "gallery"
-  },
-  {
-    title: "Coding in the Clouds",
-    excerpt: "How altitude affects programming productivity...",
-    date: "Feb 20, 2025",
-    type: "blog"
-  },
-  {
-    title: "Quote of the Day",
-    content: "The mountains are calling and I must go.",
-    author: "John Muir",
-    type: "quote"
-  }
-];
 
 // Current year conventions
 const currentYearConventions = [
@@ -44,20 +12,20 @@ const currentYearConventions = [
     name: "MYFur",
     date: "May 2, 2026",
     location: "Subang, Malaysia",
-    confirmed: true
+    confirmed: true,
   },
   {
     name: "IWAG",
     date: "July 4-5, 2026",
     location: "Jakarta, Indonesia",
-    confirmed: true
+    confirmed: true,
   },
   {
     name: "EF",
     date: "August 19-23, 2026",
     location: "Hamburg, Germany",
-    confirmed: true
-  }
+    confirmed: true,
+  },
 ];
 
 const pastConventions = {
@@ -73,11 +41,16 @@ const projects = [
 ];
 
 export default function Home() {
+  const [latestPost] = getAllDiaryPosts();
+
   return (
     <div className="pt-6 pb-10 px-4 sm:px-6">
       {/* Header */}
       <header className="mb-8">
-        <h1 className="text-3xl font-mono font-medium mb-2"> &gt; smores&apos;s directory</h1>
+        <h1 className="text-3xl font-mono font-medium mb-2">
+          {" "}
+          &gt; smores&apos;s directory
+        </h1>
         <p className="text-himalaya-shadow">
           links, projects, other stuff you should know about me
         </p>
@@ -88,12 +61,14 @@ export default function Home() {
         {/* Featured Post */}
         <div className="bg-white rounded-lg shadow-sm p-6 sm:col-span-2 transition-all hover:shadow-md border border-himalaya-mist">
           <h2 className="text-xl font-mono font-medium mb-4">latest post.</h2>
-          <h3 className="text-lg mb-2">{posts[0].title}</h3>
-          <p className="text-himalaya-shadow mb-4">{posts[0].excerpt}</p>
+          <h3 className="text-lg mb-2">{latestPost.title}</h3>
+          <p className="text-himalaya-shadow mb-4">{latestPost.excerpt}</p>
           <div className="flex justify-between items-center">
-            <span className="text-sm text-himalaya-shadow">{posts[0].date}</span>
-            <Link 
-              href="/diary" 
+            <span className="text-sm text-himalaya-shadow">
+              {format(new Date(latestPost.date), "MMM d, yyyy")}
+            </span>
+            <Link
+              href="/diary"
               className="text-himalaya-deep hover:text-himalaya-accent transition-colors"
             >
               Read more →
@@ -109,14 +84,14 @@ export default function Home() {
           {/* Convention listings - taller card */}
           <div className="bg-white rounded-lg shadow-sm p-4 sm:p-5 transition-all hover:shadow-md border border-himalaya-mist">
             <h2 className="text-xl font-mono font-medium mb-3">conventions.</h2>
-            
+
             {/* Current year plans - more compact */}
             <h3 className="text-md mb-2"> &gt; current cons</h3>
             <div className="space-y-2 mb-4">
               {currentYearConventions.map((con, index) => (
                 <blockquote
                   key={index}
-                  className={`border-l-4 ${con.confirmed ? 'border-himalaya-accent' : 'border-himalaya-stone'} pl-3 mb-1`}
+                  className={`border-l-4 ${con.confirmed ? "border-himalaya-accent" : "border-himalaya-stone"} pl-3 mb-1`}
                 >
                   <div className="font-medium text-sm">{con.name}</div>
                   <div className="flex flex-wrap text-xs text-himalaya-shadow gap-x-2">
@@ -124,14 +99,18 @@ export default function Home() {
                     <span>•</span>
                     <span>{con.location}</span>
                     <span>•</span>
-                    <span className={con.confirmed ? "text-green-600" : "text-amber-600"}>
+                    <span
+                      className={
+                        con.confirmed ? "text-green-600" : "text-amber-600"
+                      }
+                    >
                       {con.confirmed ? "Confirmed" : "Tentative"}
                     </span>
                   </div>
                 </blockquote>
               ))}
             </div>
-            
+
             {/* Past conventions - more compact */}
             <h3 className="text-md mb-2"> &gt; past cons </h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-2">
@@ -150,15 +129,21 @@ export default function Home() {
 
           {/* Digital Garden - shorter card */}
           <div className="bg-white rounded-lg shadow-sm p-4 sm:p-5 transition-all hover:shadow-md border border-himalaya-mist flex-shrink">
-            <h2 className="text-xl font-mono font-medium mb-2">digital garden.</h2>
-            <p className="text-himalaya-shadow mb-3 text-sm">projects i&apos;m currently growing:</p>
-            
+            <h2 className="text-xl font-mono font-medium mb-2">
+              digital garden.
+            </h2>
+            <p className="text-himalaya-shadow mb-3 text-sm">
+              projects i&apos;m currently growing:
+            </p>
+
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               {projects.map((project, index) => (
                 <div key={index} className="relative">
                   <div className="flex justify-between mb-1">
                     <span className="text-sm">{project.name}</span>
-                    <span className="text-xs text-himalaya-shadow">{project.progress}%</span>
+                    <span className="text-xs text-himalaya-shadow">
+                      {project.progress}%
+                    </span>
                   </div>
                   <div className="h-2 bg-himalaya-mist rounded-full overflow-hidden">
                     <div
@@ -186,8 +171,8 @@ export default function Home() {
             <span className="text-sm text-himalaya-shadow">
               {galleryImages.length} images
             </span>
-            <Link 
-              href="/gallery" 
+            <Link
+              href="/gallery"
               className="text-himalaya-deep hover:text-himalaya-accent transition-colors"
             >
               View Gallery →
@@ -201,7 +186,9 @@ export default function Home() {
           <div className="space-y-3">
             <div>
               <p className="font-medium">currently reading</p>
-              <p className="text-sm text-himalaya-shadow">A Philosophy of Software Design</p>
+              <p className="text-sm text-himalaya-shadow">
+                A Philosophy of Software Design
+              </p>
             </div>
             <div>
               <p className="font-medium">up next</p>
@@ -218,8 +205,16 @@ export default function Home() {
       <div className="mt-10 mb-6">
         <h2 className="text-xl font-mono font-medium mb-4">explore topics</h2>
         <div className="flex flex-wrap gap-2">
-          {['Art', 'Code', 'Travel', 'Tech', 'Design', 'Music', 'Boba reviews'].map((tag, index) => (
-            <Link 
+          {[
+            "Art",
+            "Code",
+            "Travel",
+            "Tech",
+            "Design",
+            "Music",
+            "Boba reviews",
+          ].map((tag, index) => (
+            <Link
               key={index}
               href={`/tags/${tag.toLowerCase()}`}
               className="px-3 py-1 bg-white rounded-full text-sm text-himalaya-shadow border border-himalaya-mist hover:bg-himalaya-mist transition-colors"
