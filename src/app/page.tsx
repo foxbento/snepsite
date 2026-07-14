@@ -35,9 +35,9 @@ const pastConventions = {
 
 // Projects for the digital garden section
 const projects = [
-  { name: "personal site", progress: 65 },
-  { name: "pc part collecting", progress: 35 },
-  { name: "practicing drawing", progress: 5 },
+  { name: "personal site", progress: 95 },
+  { name: "new HE keyboard", progress: 15 },
+  { name: "getting baking ingredients", progress: 25 },
 ];
 
 export default function Home() {
